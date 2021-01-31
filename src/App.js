@@ -9,15 +9,16 @@ function App() {
   const [tours, setTours] = useState([])
 
   const fetchTours = async () => {
+    setLoading(true)
+
     try {
-      setLoading(false)
       const response = await fetch(url)
       const tours = await response.json()
-      console.log(tours)
+      setLoading(false)
       setTours(tours)
     } catch (error) {
       setLoading(false)
-      console.log("error")
+      console.log(error)
     }
   }
 
@@ -34,7 +35,7 @@ function App() {
   }
   return(
   <main>
-    <Tours />
+    <Tours tours={tours}/>
   </main>
   )
 }
